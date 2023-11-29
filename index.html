@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Curug Gangsa Indah</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
+    <!-- Pustaka Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Caveat&family=Montserrat:wght@500&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Montserrat", sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            font-family: "Montserrat", sans-serif;
+            background: url(landscape1.jpg) no-repeat;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            display: flex;
+            padding: 1.3rem 7%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+        }
+
+        .navbar::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(30px);
+            z-index: -1;
+        }
+
+        .navbar::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, .4), transparent);
+            transition: .5s;
+        }
+
+        .navbar:hover::after {
+            left: 100%;
+        }
+
+        .navbar-logo {
+            text-decoration: none;
+            color: #ffff;
+            font-size: 1.4rem;
+            font-weight: 700;
+            text-decoration: none;
+        }
+
+        .navbar-logo:hover,
+        .nav-items a:hover {
+            color: #ffff;
+            text-decoration: none;
+        }
+
+        .navbar-logo img {
+            height: 40px;
+            width: 40px;
+            margin-right: 10px;
+            vertical-align: middle;
+        }
+
+        .nav-items a {
+            padding: 8px;
+            color: #ffff;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        #check {
+            display: none;
+        }
+
+        .icons {
+            position: absolute;
+            right: 5%;
+            display: none;
+            font-size: 2.8rem;
+            color: #ffff;
+            cursor: pointer;
+        }
+
+        @media (max-width: 992px) {
+            .navbar {
+                padding: 1.3rem 5%;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .icons {
+                display: inline-flex;
+            }
+
+            #check:checked~.icons #menu-icon {
+                display: none;
+            }
+
+            .icons #close-icon {
+                display: none;
+            }
+
+            #check:checked~.icons #close-icon {
+                display: block;
+            }
+
+            .nav-items {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                height: 0;
+                background-color: rgba(0, 0, 0, .1);
+                backdrop-filter: blur(50px);
+                box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .1);
+                overflow: hidden;
+                transition: .3s ease;
+            }
+
+            #check:checked~.nav-items {
+                height: 17.7rem;
+            }
+
+            .nav-items a {
+                display: block;
+                font-size: 1.1rem;
+                margin: 1.5rem 0;
+                text-align: center;
+                transform: translateY(-50px);
+                opacity: 0;
+                transition: .3s ease;
+            }
+
+            #check:checked~.nav-items a {
+                transform: translateY(0);
+                opacity: 1;
+                transition-delay: calc(.15s * var(--i));
+            }
+        }
+
+        /* Hero Section */
+
+        .hero .content,
+        .hero .content p,
+        .hero .content h1,
+        .hero .content .cta {
+            color: #fff;
+        }
+
+        section,
+        section h2,
+        section p {
+            color: #fff;
+        }
+
+        .Ticket-info,
+        .Ticket-info h3,
+        .Ticket-info p,
+        .Ticket-info a {
+            color: #fff;
+        }
+
+        #contact,
+        #contact h2,
+        #contact p {
+            color: #fff;
+        }
+
+        footer,
+        footer h3,
+        footer a {
+            color: #fff;
+        }
+
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            transition: transform 0.8s;
+            position: relative;
+        }
+
+        .hero .content {
+            padding: 20px 80px 7%;
+        }
+
+        .hero .content h1 {
+            font-size: 35px;
+            font-weight: 700;
+            line-height: 0.8;
+        }
+
+        .hero .content p {
+            font-family: "Caveat", sans-serif;
+            font-size: 28px;
+        }
+
+        .cta {
+            margin-top: 20px;
+            background: #435334;
+            padding: 15px 25px;
+            border-radius: 14px;
+            color: #ffff;
+            text-decoration: none;
+            position: relative;
+            top: 30px;
+        }
+
+        .cta-animate {
+            animation: zoomIn 0.5s ease;
+        }
+
+        @keyframes zoomIn {
+            from {
+                transform: scale(0);
+            }
+
+            to {
+                transform: scale(1);
+            }
+        }
+
+        /* Section Common */
+        section {
+            padding: 80px;
+        }
+
+        section h2 {
+            text-align: center;
+            margin-bottom: 40px;
+            font-size: 35px;
+            position: relative;
+        }
+
+        /* Ticket Section */
+        #ticket {
+            padding: 120px 80px;
+            color: #fff;
+        }
+
+        #ticket h2 {
+            text-align: center;
+            margin-bottom: 40px;
+            font-size: 35px;
+            position: relative;
+        }
+
+        .Ticket-info {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        form {
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            color: #fff;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #f5c32c;
+            color: #ffff;
+            padding: 15px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #e0b825;
+        }
+
+        /* Footer */
+        footer {
+            background: #06241d;
+            color: #fff;
+            padding: 50px 0;
+        }
+
+        .footer-container {
+            max-width: 1100px;
+            margin: auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .footer-links {
+            width: 25%;
+        }
+
+        .footer-links h3 {
+            font-size: 18px;
+            font-weight: 500;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .footer-links h3::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -5px;
+            height: 2px;
+            width: 50px;
+            background: #f5c32c;
+        }
+
+        .footer-links ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links ul li a {
+            color: #ccc;
+            transition: .3s;
+        }
+
+        .footer-links ul li a:hover {
+            color: #fff;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 25px;
+        }
+
+        @media (max-width: 991px) {
+            header {
+                padding: 20px;
+            }
+
+            .hero .content {
+                padding: 20px;
+            }
+
+            section {
+                padding: 40px;
+            }
+
+            footer {
+                padding: 20px;
+            }
+
+            .navbar-nav {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .navbar-nav .nav-item {
+                margin: 10px 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header class="navbar">
+        <a href="#" class="navbar-logo"><img src="logo.png" alt="icon-logo">Curug Gangsa Indah</a>
+
+        <input type="checkbox" id="check">
+        <label for="check" class="icons">
+            <i class='bx bx-menu' id="menu-icon"></i>
+            <i class='bx bx-x' id="close-icon"></i>
+        </label>
+        <nav class="nav-items">
+            <a href="#home" style="--i:0;">Home</a>
+            <a href="#about" style="--i:1;">About</a>
+            <a href="#ticket" style="--i:2;">Ticket</a>
+            <a href="#contact" style="--i:3;">Contact</a>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="content">
+            <h1>Wisata Air Terjun Gangsa Indah</h1>
+            <p>Begin a new journey amidst stunning waterfalls</p>
+            <a href="#ticket" class="cta">Pesan Tiket</a>
+        </div>
+    </section>
+
+    <!-- Ticket Section -->
+    <section id="ticket">
+        <h2>Pesan Tiket</h2>
+        <div class="Ticket-info">
+            <form action="proses_pesanan.php" method="post">
+                <label for="nama">Nama:</label>
+                <input type="text" id="nama" name="nama" required>
+
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+
+                <label for="jumlah_tiket">Jumlah Tiket:</label>
+                <input type="number" id="jumlah_tiket" name="jumlah_tiket" min="1" required>
+
+                <label for="tanggal">Tanggal Kunjungan:</label>
+                <input type="date" id="tanggal" name="tanggal" required>
+
+                <button type="submit">Pesan Tiket</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <h2>Kontak Kami</h2>
+        <p>Jam operasional: 08.00 - 18.00 WIB</p>
+        <p>Nama: Diki Darmawan</p>
+        <p>Email: info@curuggangsa.com</p>
+    </section>
+
+    <!-- Footer -->
+    <footer id="footer">
+        <div class="footer-container">
+            <div class="footer-links">
+                <h3>Tentang Kami</h3>
+                <ul>
+                    <li><a href="#">Careers</a></li>
+                    <li><a href="#">Our Stores</a></li>
+                    <li><a href="#">Terms & Conditions</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h3>Layanan Pelanggan</h3>
+                <ul>
+                    <li><a href="#">Help Center</a></li>
+                    <li><a href="#">How to Shop</a></li>
+                    <li><a href="#">Payment Method</a></li>
+                    <li><a href="#">Delivery Terms</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h3>Hubungi Kami</h3>
+                <ul>
+                    <li><a href="#">Facebook</a></li>
+                    <li><a href="#">Twitter</a></li>
+                    <li><a href="#">Instagram</a></li>
+                    <li><a href="#">Email</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright">
+            &copy; 2023 Curug Gangsa Indah. All rights reserved.
+        </div>
+    </footer>
+
+    <!-- [JS] animasi close menu  -->
+    <script>
+        function closeMenu() {
+            document.getElementById('check').checked = false;
+        }
+
+        document.querySelectorAll('.nav-items a').forEach(function (item) {
+            item.addEventListener('click', closeMenu);
+        });
+    </script>
+
+    <!-- Memuat jQuery dari Google CDN -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+
+    <script>
+        $(document).ready(function () {
+            $(".cta").on('click', function (event) {
+                event.preventDefault();
+                var target = $("#ticket");
+                $('html, body').animate({
+                    scrollTop: target.offset().top
+                }, 600);
+            });
+
+            $(".nav-items a[href='#home']").on('click', function (event) {
+                event.preventDefault();
+                var target = $("#home");
+                $('html, body').animate({
+                    scrollTop: target.offset().top
+                }, 600);
+            });
+
+            $(".nav-items a[href='#about']").on('click', function (event) {
+                event.preventDefault();
+                var target = $("#footer");
+                $('html, body').animate({
+                    scrollTop: target.offset().top
+                }, 600);
+            });
+
+            $(".nav-items a[href='#ticket']").on('click', function (event) {
+                event.preventDefault();
+                var target = $("#ticket");
+                $('html, body').animate({
+                    scrollTop: target.offset().top
+                }, 600);
+            });
+
+            $(".nav-items a[href='#contact']").on('click', function (event) {
+                event.preventDefault();
+                var target = $("#contact");
+                $('html, body').animate({
+                    scrollTop: target.offset().top
+                }, 600);
+            });
+        });
+    </script>
+
+</body>
